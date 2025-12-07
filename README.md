@@ -1,245 +1,393 @@
-# Real-time Collaborative Coding Interview Platform
+# 🚀 Collaborative Coding Interview Platform
 
-A Docker-first web application for conducting collaborative coding interviews in real-time. Built with React, Node.js, Express, Socket.IO, and Monaco Editor.
+A modern, real-time collaborative coding platform for technical interviews. Built with React, Node.js, Express, Socket.IO, and Monaco Editor (VS Code's editor). Features beautiful dark/light themes and supports JavaScript and Python code execution in the browser.
 
-## Features
+[![Deployed on Render](https://img.shields.io/badge/Deployed-Render-46E3B7)](https://render.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
-- 🚀 Real-time collaborative code editing
-- 👥 Multiple users can edit simultaneously
-- 💻 Syntax highlighting for JavaScript and Python
-- 🔒 Safe in-browser code execution (Pyodide for Python, sandboxed iframe for JavaScript)
-- 🐳 Docker-based development and testing
-- ⚡ Hot-reload enabled for both frontend and backend
+![App Screenshot](docs/images/app-screenshot.jpg)
 
-## Tech Stack
+## ✨ Features
 
-- **Frontend**: React + Vite, Monaco Editor
-- **Backend**: Node.js + Express + Socket.IO
-- **Testing**: Jest + Supertest (integration), Playwright (E2E)
-- **Development**: Docker Compose with hot-reload
-- **Deployment**: Containerized (Railway/Render/Fly.io)
+### 🎨 **Modern UI with Theming**
+- **Dark/Light Mode Toggle** - Beautiful red-orange-black dark theme and red-orange-white light theme
+- **Gradient Effects** - Professional card-based design with smooth transitions
+- **Responsive Layout** - Works on desktop and mobile devices
+- **Theme Persistence** - Your theme preference is saved locally
 
-## Quick Start
+### 👥 **Real-time Collaboration**
+- **Multi-user Support** - Multiple users can join the same room
+- **Live Code Sync** - See code changes in real-time across all connected users
+- **User Presence** - See who's in the room with you
+- **Connection Status** - Visual indicators for connection state
+
+### 💻 **Advanced Code Editor**
+- **Monaco Editor** - The same editor that powers VS Code
+- **Syntax Highlighting** - Support for JavaScript and Python
+- **Auto-completion** - Intelligent code suggestions
+- **Multiple Languages** - Switch between JavaScript and Python
+
+### ⚡ **Code Execution**
+- **JavaScript Execution** - Safe sandboxed execution in isolated iframes
+- **Python Execution** - Browser-based Python via Pyodide (WebAssembly)
+- **Real-time Output** - See results immediately
+- **Error Handling** - Clear error messages with syntax highlighting
+
+### 🧪 **Comprehensive Testing**
+- **Integration Tests** - Jest + Supertest for API and Socket.IO
+- **E2E Tests** - Playwright for end-to-end scenarios
+- **9 Test Suites** - Covering collaboration, execution, and API endpoints
+
+### 🐳 **Production-Ready**
+- **Docker-based** - Consistent environments across dev and production
+- **Multi-stage Builds** - Optimized production images
+- **Health Checks** - Automatic container health monitoring
+- **CI/CD Pipeline** - Automated testing and deployment
+
+## 🎯 Tech Stack
+
+### Frontend
+- **React 18** - Modern UI library
+- **Vite** - Lightning-fast build tool
+- **Monaco Editor** - VS Code's editor component
+- **Pyodide 0.29.0** - Python in the browser
+- **Socket.IO Client** - Real-time communication
+
+### Backend
+- **Node.js 20** - JavaScript runtime
+- **Express** - Web framework
+- **Socket.IO** - WebSocket server
+- **Docker** - Containerization
+
+### Testing & CI/CD
+- **Jest** - Integration testing
+- **Playwright** - E2E testing
+- **GitHub Actions** - Continuous integration
+- **Render** - Cloud deployment
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Docker Desktop installed and running
-- Git
+- **Docker Desktop** installed and running
+- **Git**
+- **Make** (optional, for convenience commands)
 
-### Setup
+### Installation
 
 ```bash
 # Clone repository
-git clone <your-repo-url>
+git clone https://github.com/KonuTech/ai-dev-tools-zoomcamp-hw-02.git
 cd ai-dev-tools-zoomcamp-hw-02
 
 # Copy environment variables
 cp .env.example .env
 
-# Start the application
-docker-compose up
-```
-
-The application will be available at:
-- **Frontend**: http://localhost:5173
-- **Backend**: http://localhost:3000
-
-## Using Make Commands
-
-For convenience, a Makefile is provided with common commands:
-
-```bash
-# View all available commands
-make help
-
-# Start the application
-make start          # Detached mode (runs in background)
-make dev            # Attached mode (see logs in terminal)
-
-# Stop the application
-make stop
-
-# Restart the application
-make restart
-
-# View logs
-make logs           # All services
-make logs-server    # Server only
-make logs-client    # Client only
-
-# Build images
-make build          # Normal build
-make rebuild        # Clean rebuild (no cache)
-
-# Run tests
-make test           # All tests
-make test-int       # Integration tests
-make test-e2e       # E2E tests
-
-# Install dependencies
-make install        # All dependencies
-make install-server # Server only
-make install-client # Client only
-
-# Access container shells
-make shell-server
-make shell-client
-
-# Cleanup
-make clean          # Remove containers and volumes
-make clean-all      # Remove everything including images
-```
-
-## Development
-
-### Running the app
-
-```bash
-# Using Make (recommended)
-make start          # Start in background
-make dev            # Start and view logs
+# Start the application (using Make)
+make start
 
 # Or using docker-compose directly
-docker-compose up -d    # Start in background
-docker-compose up       # Start and view logs
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
+docker-compose up -d
 ```
 
-### Installing new dependencies
+### Access the Application
 
+- **Frontend**: http://localhost:5173
+- **Backend**: http://localhost:3000
+- **Health Check**: http://localhost:3000/health
+
+### Using the App
+
+1. **Open** http://localhost:5173 in your browser
+2. **Click** the theme toggle (top-right) to switch between dark/light modes
+3. **Enter** your name and a room ID
+4. **Click** "Join Room"
+5. **Open** another browser/tab with the same room ID to test collaboration
+6. **Write** some code and see it sync in real-time
+7. **Click** "Run Code" to execute JavaScript or Python
+
+## 📦 Make Commands
+
+View all available commands:
 ```bash
-# Add server dependency
-docker-compose exec server npm install <package-name>
-
-# Add client dependency
-docker-compose exec client npm install <package-name>
-
-# Rebuild after adding dependencies
-docker-compose down
-docker-compose build
-docker-compose up
+make help
 ```
 
-### Running tests
-
+### Development
 ```bash
-# Run all tests (integration + E2E)
-npm run test
-
-# Run integration tests only
-npm run test:integration
-
-# Run E2E tests only
-npm run test:e2e
+make start          # Start application (detached)
+make dev            # Start with logs (attached)
+make stop           # Stop application
+make restart        # Restart application
+make build          # Build Docker images
+make rebuild        # Clean rebuild (no cache)
 ```
 
-## Project Structure
+### Logs & Monitoring
+```bash
+make logs           # All service logs
+make logs-server    # Server logs only
+make logs-client    # Client logs only
+make ps             # List running containers
+make status         # Application status
+make health         # Check health endpoint
+```
+
+### Testing
+```bash
+make test           # Run all tests
+make test-int       # Integration tests only
+make test-e2e       # E2E tests only
+make test-quick     # Quick integration test
+```
+
+### Production
+```bash
+make prod-build     # Build production image
+make prod-start     # Start production container
+make prod-stop      # Stop production
+make prod-logs      # Production logs
+make prod           # Build and start production
+```
+
+### Cleanup
+```bash
+make clean          # Remove containers and volumes
+make clean-all      # Remove everything
+make prune          # Remove unused Docker resources
+```
+
+## 📁 Project Structure
 
 ```
-├── client/                 # React + Vite frontend
+ai-dev-tools-zoomcamp-hw-02/
+├── client/                      # React + Vite frontend
 │   ├── src/
-│   │   ├── app/           # Main app component and styles
-│   │   ├── components/    # Reusable components
-│   │   ├── pages/         # Page components
-│   │   └── editor/        # Monaco editor setup
+│   │   ├── app/
+│   │   │   ├── App.jsx         # Main app component
+│   │   │   ├── useSocket.js    # Socket.IO hook
+│   │   │   ├── useTheme.js     # Theme management hook
+│   │   │   └── index.css       # Global styles + CSS variables
+│   │   ├── components/
+│   │   │   ├── CodeEditor.jsx  # Monaco Editor wrapper
+│   │   │   ├── OutputConsole.jsx  # Code execution output
+│   │   │   └── ThemeToggle.jsx # Dark/Light mode toggle
+│   │   ├── pages/
+│   │   │   └── Room.jsx        # Collaborative room
+│   │   ├── services/
+│   │   │   ├── pythonExecutor.js   # Pyodide integration
+│   │   │   └── javascriptExecutor.js  # Sandboxed JS execution
+│   │   └── main.jsx
 │   └── package.json
-├── server/                # Express + Socket.IO backend
+│
+├── server/                      # Express + Socket.IO backend
 │   ├── src/
-│   │   ├── index.js       # Main server file
-│   │   ├── routes/        # API routes
-│   │   └── realtime/      # Socket.IO handlers
-│   ├── tests/             # Integration tests
+│   │   └── index.js            # Server + Socket.IO handlers
+│   ├── tests/
+│   │   ├── socket.test.js      # Socket.IO integration tests
+│   │   └── api.test.js         # HTTP endpoint tests
 │   └── package.json
+│
+├── e2e/                         # Playwright E2E tests
+│   └── tests/
+│       ├── collaboration.spec.js  # Real-time collaboration tests
+│       └── execution.spec.js      # Code execution tests
+│
 ├── docker/
-│   └── Dockerfile.dev     # Development Dockerfile
-├── e2e/                   # Playwright E2E tests
-├── docker-compose.yml     # Development environment
-└── package.json           # Root package.json with scripts
+│   ├── Dockerfile              # Production multi-stage build
+│   └── Dockerfile.dev          # Development environment
+│
+├── .github/workflows/
+│   └── ci-cd.yml               # GitHub Actions CI/CD
+│
+├── docker-compose.yml          # Development environment
+├── docker-compose.prod.yml     # Production environment
+├── docker-compose.test.yml     # Testing environment
+├── Makefile                    # Convenience commands
+├── render.yaml                 # Render deployment config
+├── DEPLOYMENT.md               # Deployment guide
+└── AGENTS.md                   # Development workflow
 ```
 
-## Development Roadmap
+## 🧪 Testing
 
-- [x] Phase 1: Scaffold & Docker Setup
-- [ ] Phase 2: Real-time Collaboration
-- [ ] Phase 3: Code Editor Integration (Monaco)
-- [ ] Phase 4: Code Execution (Pyodide + Sandbox)
-- [ ] Phase 5: Testing (Integration + E2E)
-- [ ] Phase 6: Production & CI/CD
-- [ ] Phase 7: Polish & Documentation
-
-## Scripts
-
-### Root Level
-- `npm run dev` - Start both client and server in Docker
-- `npm run build` - Build Docker images
-- `npm run test` - Run all tests in Docker
-- `npm run down` - Stop all services
-- `npm run clean` - Clean up Docker resources
-
-### Server
-- `npm run dev` - Start server with nodemon
-- `npm run test:integration` - Run integration tests
-
-### Client
-- `npm run dev` - Start Vite dev server
-- `npm run build` - Build for production
-
-## Environment Variables
-
-See `.env.example` for required environment variables.
-
-Key variables:
-- `NODE_ENV` - Environment (development/production)
-- `PORT` - Server port (default: 3000)
-- `CLIENT_URL` - Client URL for CORS
-- `VITE_SERVER_URL` - Server URL for client
-
-## Docker Commands
+### Integration Tests (9 tests)
 
 ```bash
-# Rebuild all services
-docker-compose build --no-cache
-
-# Rebuild specific service
-docker-compose build --no-cache server
-
-# Access container shell
-docker-compose exec server sh
-
-# View real-time logs
-docker-compose logs -f server
+make test-int
 ```
 
-## Troubleshooting
+**Socket.IO Tests:**
+- ✅ Server starts and accepts connections
+- ✅ Users can join rooms
+- ✅ Code changes sync between users
+- ✅ Language changes sync
+- ✅ Multiple users in same room
+- ✅ User presence tracking
 
-### Container won't start
+**API Tests:**
+- ✅ Health endpoint returns 200
+- ✅ Correct content type
+- ✅ 404 handling
+
+### E2E Tests
+
 ```bash
-docker-compose logs server
+make test-e2e
 ```
 
-### Port already in use
+**Collaboration Tests:**
+- ✅ Room joining and connection
+- ✅ Multi-user code synchronization
+- ✅ Language switching
+
+**Execution Tests:**
+- ✅ JavaScript code execution
+- ✅ Python code execution (with Pyodide)
+- ✅ Error handling
+- ✅ Output clearing
+
+## 🎨 Themes
+
+### Dark Mode (Red-Orange-Black)
+- Background: Deep blacks (#0d0d0d, #1a1a1a)
+- Accents: Red (#dc3545) and Orange (#fd7e14)
+- Text: Light gray (#e9ecef)
+- Effects: Glowing orange shadows
+
+### Light Mode (Red-Orange-White)
+- Background: Clean whites (#ffffff, #f8f9fa)
+- Accents: Red (#dc3545) and Orange (#fd7e14)
+- Text: Dark gray (#1a1a1a)
+- Effects: Subtle shadows
+
+## 🌐 Deployment
+
+### Deployed on Render
+
+The application is deployed on Render with automatic deployments from the `main` branch.
+
+**Deployment Configuration:**
+- **Platform**: Render
+- **Region**: Frankfurt
+- **Environment**: Docker
+- **Health Check**: `/health`
+- **Auto-deploy**: Enabled
+
+### Deploy Your Own
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions for:
+- **Render** (recommended)
+- **Railway**
+- **Fly.io**
+- **DigitalOcean**
+- **Self-hosted VPS**
+
+### Production Build
+
 ```bash
+# Build production image
+make prod-build
+
+# Start production locally
+make prod-start
+
+# Access at http://localhost:3000
+```
+
+## 📋 Environment Variables
+
+### Development (`.env`)
+```env
+NODE_ENV=development
+PORT=3000
+CLIENT_URL=http://localhost:5173
+VITE_SERVER_URL=http://localhost:3000
+```
+
+### Production (`.env.production`)
+```env
+NODE_ENV=production
+PORT=3000
+```
+
+## 🏗️ Development Phases
+
+All phases completed! ✅
+
+- ✅ **Phase 1**: Scaffold & Docker Setup
+- ✅ **Phase 2**: Real-time Collaboration (Socket.IO)
+- ✅ **Phase 3**: Code Editor Integration (Monaco)
+- ✅ **Phase 4**: Code Execution (Pyodide + Sandbox)
+- ✅ **Phase 5**: Testing & Quality Assurance
+- ✅ **Phase 6**: Production & CI/CD
+
+## 🔧 Troubleshooting
+
+### Port Already in Use
+
+```bash
+make clean
+# Or manually:
 docker-compose down
-lsof -ti:3000 | xargs kill -9  # Kill process on port 3000
+lsof -ti:3000 | xargs kill -9
+lsof -ti:5173 | xargs kill -9
 ```
 
-### Clear everything and restart
+### Container Won't Start
+
 ```bash
-docker-compose down -v
-docker system prune -f
-docker-compose build --no-cache
-docker-compose up
+make logs
+# Check for errors in the logs
 ```
 
-## Contributing
+### Clear Everything and Restart
 
-See [AGENTS.md](./AGENTS.md) for git conventions and workflow guidelines.
+```bash
+make clean-all
+make build
+make start
+```
 
-## License
+### Theme Not Persisting
+
+Clear browser localStorage and refresh:
+```javascript
+localStorage.clear()
+location.reload()
+```
+
+## 📚 Documentation
+
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Comprehensive deployment guide
+- **[AGENTS.md](./AGENTS.md)** - Development workflow and conventions
+- **[Makefile](./Makefile)** - All available commands with descriptions
+
+## 🤝 Contributing
+
+This project was developed as part of the AI & Dev Tools Zoomcamp. Contributions, issues, and feature requests are welcome!
+
+### Development Workflow
+
+1. Create a feature branch
+2. Make changes with hot-reload enabled
+3. Run tests: `make test`
+4. Commit with conventional commits
+5. Push and create PR
+
+## 📄 License
 
 MIT
+
+## 🙏 Acknowledgments
+
+- Built with guidance from the **AI & Dev Tools Zoomcamp**
+- Developed with **Claude Code** by Anthropic
+- Icons and emojis from **Unicode Consortium**
+
+---
+
+**Ready to conduct your next coding interview?** 🎯
+
+Start collaborating in real-time with beautiful themes and powerful code execution!
