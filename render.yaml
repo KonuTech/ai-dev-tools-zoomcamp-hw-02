@@ -11,5 +11,5 @@ services:
         value: 3000
     healthCheckPath: /health
     plan: free
-    region: oregon
+    region: frankfurt
     autoDeploy: true
