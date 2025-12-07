@@ -6,6 +6,8 @@ A modern, real-time collaborative coding platform for technical interviews. Buil
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
+**🌐 Live Demo:** [https://coding-interview-platform-08jm.onrender.com/](https://coding-interview-platform-08jm.onrender.com/)
+
 ![App Screenshot](docs/images/app-screenshot.jpg)
 
 ## ✨ Features
@@ -266,7 +268,9 @@ make test-e2e
 
 ### Deployed on Render
 
-The application is deployed on Render with automatic deployments from the `main` branch.
+The application is live and deployed on Render with automatic deployments from the `main` branch.
+
+**🌐 Live Application:** [https://coding-interview-platform-08jm.onrender.com/](https://coding-interview-platform-08jm.onrender.com/)
 
 **Deployment Configuration:**
 - **Platform**: Render
@@ -274,6 +278,7 @@ The application is deployed on Render with automatic deployments from the `main`
 - **Environment**: Docker
 - **Health Check**: `/health`
 - **Auto-deploy**: Enabled
+- **URL**: https://coding-interview-platform-08jm.onrender.com/
 
 ### Deploy Your Own
 
