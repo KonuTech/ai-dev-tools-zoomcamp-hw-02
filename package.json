@@ -1,0 +1,32 @@
+{
+  "name": "coding-interview-platform",
+  "version": "1.0.0",
+  "description": "Real-time collaborative coding interview platform with Docker-based development",
+  "private": true,
+  "scripts": {
+    "dev": "docker-compose up",
+    "dev:detached": "docker-compose up -d",
+    "down": "docker-compose down",
+    "build": "docker-compose build",
+    "test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from test-e2e",
+    "test:integration": "docker-compose -f docker-compose.test.yml run --rm test-integration",
+    "test:e2e": "docker-compose -f docker-compose.test.yml run --rm test-e2e",
+    "test:local": "npm run test:integration --prefix server && npx playwright test",
+    "logs": "docker-compose logs -f",
+    "clean": "docker-compose down -v && docker system prune -f"
+  },
+  "keywords": [
+    "coding-interview",
+    "real-time",
+    "collaboration",
+    "docker",
+    "react",
+    "nodejs",
+    "socket.io"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.38.0"
+  }
+}

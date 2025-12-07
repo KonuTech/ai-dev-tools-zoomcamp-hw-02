@@ -1,0 +1,43 @@
+# Base image with common dependencies
+FROM node:20-bullseye-slim AS base
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+
+# Server development stage
+FROM base AS server-dev
+WORKDIR /app/server
+COPY server/package*.json ./
+RUN npm install
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
+
+# Client development stage
+FROM base AS client-dev
+WORKDIR /app/client
+COPY client/package*.json ./
+RUN npm install
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+# Integration test stage
+FROM base AS test-integration
+WORKDIR /app/server
+COPY server/package*.json ./
+RUN npm install
+COPY server/ .
+ENV NODE_ENV=test
+CMD ["npm", "run", "test:integration"]
+
+# E2E test stage
+FROM base AS test-e2e
+WORKDIR /app
+# Install Playwright and browsers
+RUN npx playwright install --with-deps chromium
+COPY package*.json ./
+RUN npm install
+COPY . .
+ENV NODE_ENV=test
+CMD ["npx", "playwright", "test"]
